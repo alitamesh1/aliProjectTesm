@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(GraduatedGroups)
 admin.site.register(SuggestedSupervisor)
+admin.site.register(Suggestions)

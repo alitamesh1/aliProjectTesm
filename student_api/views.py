@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import *
-from rest_framework import generics,status,viewsets
+from rest_framework import generics,status,viewsets,permissions
 from rest_framework.response import Response
 
 # Create your views here.
@@ -27,6 +27,21 @@ class SuggestedSupervisorList(generics.ListCreateAPIView):
         university_id = self.kwargs['university_id']
         return SuggestedSupervisor.objects.filter(university_id=university_id)
 
+
+
+class SuggestionsList(generics.ListCreateAPIView):
+    queryset = Suggestions.objects.all()
+    serializer_class = SuggestionsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(user__username=username)
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 # class GraduatedGroupsList(generics.ListCreateAPIView):
 #     queryset=GraduatedGroups.objects.all()
 #     serializer_class=GraduatedProjectSerializer

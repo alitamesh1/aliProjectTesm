@@ -49,6 +49,19 @@ class GraduatedGroupsWERSerializer(serializers.ModelSerializer):
         model = GraduatedGroups
         fields = ['id', 'name', 'description', 'serial', 'supervisor', 'students']
 
+
+
+class MyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUsers
+        fields = ('id', 'username', 'email')
+
+class SuggestionsSerializer(serializers.ModelSerializer):
+    user = MyUserSerializer(read_only=True)
+
+    class Meta:
+        model = Suggestions
+        fields = ('id', 'name', 'phone_number', 'email', 'user')
 # class GroupMembershipSerializer(serializers.ModelSerializer):
 #     student=StudentSerializer(many=True)
 #     class Meta:

@@ -11,6 +11,14 @@ class SuggestedSupervisor(models.Model):
         return self.university.name +' has Supervisor'
 
  
+class Suggestions(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+    phone_number=models.CharField(max_length=255, blank=True)
+    email=models.CharField(max_length=255,null=True)
+    user = models.ForeignKey(MyUsers, on_delete=models.CASCADE)
+    def __str__(self) -> str:
+        return self.name
+
 
 class GraduatedGroups(models.Model):
      name = models.CharField(max_length=255, blank=True)
