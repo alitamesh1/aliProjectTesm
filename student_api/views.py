@@ -15,7 +15,17 @@ class SuggestedSupervisorLists(generics.ListCreateAPIView):
             queryset = queryset.filter(university_id=university_id)
         return queryset
     
-  
+
+class GraduatedProjectPointsLists(generics.ListCreateAPIView):
+    queryset=GraduatedProjectPoints.objects.all()
+    serializer_class = GraduatedProjectPointsSerializer
+    
+    
+class GraduatedProjectPointsDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset=GraduatedProjectPoints.objects.all()
+    serializer_class = GraduatedProjectPointsSerializer
+    
+    
 class GraduatedGroupsViewSet(viewsets.ModelViewSet):
     queryset = GraduatedGroups.objects.all()
     serializer_class = GraduatedGroupsWERSerializer

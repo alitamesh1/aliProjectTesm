@@ -7,5 +7,6 @@ urlpatterns = [
     path("", redirect_to_admin, name="to_admin"),
     path('user/', include('accounts.urls')),
     path('student/', include('student_api.urls')),
+    path('api/', include('databaseApi.urls')),
 
 ]

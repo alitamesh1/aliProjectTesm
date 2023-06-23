@@ -62,6 +62,20 @@ class SuggestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Suggestions
         fields = ('id', 'name', 'phone_number', 'email', 'user')
+
+
+
+class GraduatedGroupsProSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GraduatedGroups
+        fields = '__all__'
+
+class GraduatedProjectPointsSerializer(serializers.ModelSerializer):
+    group=GraduatedGroupsProSerializer()
+    class Meta:
+        model = GraduatedProjectPoints
+        fields = '__all__'
+
 # class GroupMembershipSerializer(serializers.ModelSerializer):
 #     student=StudentSerializer(many=True)
 #     class Meta:
