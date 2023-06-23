@@ -138,3 +138,13 @@ class RecommendSpervisorUniversityList(generics.ListAPIView):
         university=self.kwargs['university']
         #return RecommendSpervisor.objects.get(id=graduated_group_id).university.all()
         return RecommendSpervisor.objects.filter(university=university)
+    
+    
+class GroupProjectSerialList(generics.ListAPIView):
+    serializer_class = ProjectGroupSerializer
+
+    def get_queryset(self):
+        #graduated_group_id = self.kwargs['graduated_group_id']
+        serial=self.kwargs['serial']
+        #return RecommendSpervisor.objects.get(id=graduated_group_id).university.all()
+        return ProjectGroup.objects.filter(serial=serial)
