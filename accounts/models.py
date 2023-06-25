@@ -15,6 +15,7 @@ class MyUsers(AbstractUser):
     email=models.CharField(max_length=255,null=True,blank=True)
     phone = models.CharField(max_length=9, blank=True, null=True)
     is_student=models.BooleanField(default=False)
+    Work_at = models.CharField(max_length=255, blank=True, null=True)
     is_supervisor=models.BooleanField(default=False)
     is_university=models.BooleanField(default=False)
   
@@ -50,6 +51,7 @@ class Student(models.Model):
             user.username = self.uid
             user.first_name = self.name
             user.phone = self.phone_number
+            user.Work_at=self.university.name
             user.is_staff=True
             user.is_student=True
             user.is_supervisor=False
@@ -61,6 +63,7 @@ class Student(models.Model):
             self.user.username = self.uid
             self.user.first_name = self.name
             self.user.phone = self.phone_number
+            self.user.Work_at=self.university.name
             self.user.is_staff=True
             self.user.is_student=True
             self.user.is_supervisor=False
@@ -105,6 +108,7 @@ class Supervisor(models.Model):
             user.username = self.name
             user.phone = self.phone_number
             user.email=self.email
+            user.Work_at='supervisor'
             user.is_staff=True
             user.is_student=False
             user.is_supervisor=True
@@ -119,6 +123,8 @@ class Supervisor(models.Model):
             self.user.username = self.name
             self.user.phone = self.phone_number
             self.user.email =self.email
+            self.user.Work_at='supervisor'
+
             self.user.is_staff=True
             self.user.is_student=False
             self.user.is_supervisor=True
@@ -149,6 +155,8 @@ class University(models.Model):
             user = MyUsers()
             user.username = self.name
             user.phone = self.address
+            user.Work_at=self.name
+
             user.is_staff=True
             user.is_student=False
             user.is_supervisor=False
@@ -159,6 +167,7 @@ class University(models.Model):
         else:  # If the object already exists, update the associated user object as well
             self.user.username = self.name
             self.user.phone = self.address
+            self.user.Work_at=self.name
             self.user.is_staff=True
             self.user.is_student=False
             self.user.is_supervisor=False
